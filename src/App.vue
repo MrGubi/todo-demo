@@ -30,7 +30,7 @@ export default {
                     title: "This tasks is less important",
                     priority: 3,
                     deadline: '23.03.2023',
-                    completed: false,
+                    completed: true,
                 },
             ]  
         }
