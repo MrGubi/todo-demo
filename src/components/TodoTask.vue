@@ -1,20 +1,29 @@
 <template>
-    <div v-bind:class="{'completed' : todoTask.completed}">
-        <p @click="toggleComplete">{{todoTask.title}}</p>
-    </div>    
+    <div v-bind:class="{ 'completed' : todoTask.completed }">
+        <p>{{ todoTask.title }} - {{todoTask.deadline}} - {{todoTask.priority}}</p>
+        <input v-model="checked" type="checkbox" @click="$emit('toggle-task-event', todoTask.id)"/>
+        <button @click="$emit('delete-task-event', todoTask.id)">Löschen</button>
+    </div> 
 </template>
 
 <script>
 export default {
     name: 'TodoTask',
-    methods: {
-        toggleComplete() {
-            this.todoTask.completed = !this.todoTask.completed
+        props: [
+        "todoTask"
+    ],
+    data() {
+        return {
+            checked: this.todoTask.completed,
+            localTask: this.todoTask
         }
     },
-    props: [
-        "todoTask"
-    ]
+    methods: {
+
+    },
+    watch: {
+        
+    }
 }
 </script>
 
