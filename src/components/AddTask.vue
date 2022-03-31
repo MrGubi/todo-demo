@@ -2,7 +2,7 @@
     <div>
         <form @submit="addTask">
             <datepicker v-model="date"/>
-            <input type="text" v-model="title" name="title" maxlength="50"/>
+            <input type="text" v-model="title" placeholder="title" name="title" maxlength="50"/>
             <select v-model="priority">
                 <option value="1">1</option> 
                 <option value="2">2</option> 

@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <AddTask @add-task-event="addTask"/>
+  <div class="header">
+    <h1 class="Titel">Vue ToDo</h1>
+    <button @click="addHidden = !addHidden">+</button>
+  </div>
+  <div class="addtask" :style="isHidden">
+    <AddTask @add-task-event="addTask"/> 
+  </div>
     <div class="sort">
       <button value="uncompleted" @click="sortAfter = 'uncompleted'" v-bind:class="{ 'selected' : sortAfter == 'uncompleted' }">Uncompleted</button>
       <button value="deadline" @click="sortAfter = 'deadline'" v-bind:class="{ 'selected' : sortAfter == 'deadline' }">Deadline</button> 
@@ -22,6 +28,7 @@ export default {
   },
   data() {
         return {
+            addHidden: true,
             sortAfter: 'uncompleted',
             tasks: [
                 {
@@ -140,6 +147,17 @@ export default {
     }
   },
 
+  computed:{
+    isHidden(){
+      if(this.addHidden){
+        return {'--header-display': 'none'};
+      }
+      else{
+        return {'--header-display': 'show'};
+      }
+    }
+  },
+
   mounted: function() {
     this.sort(this.sortAfter);
   },
@@ -151,7 +169,7 @@ export default {
     },
     sortAfter(){
       this.sort(this.sortAfter);
-    }
+    },
   },
 }
 </script>
@@ -196,5 +214,31 @@ body {
 
 #app .sort button:not(:first-child){
   margin-left: 10px;
+}
+
+.addtask{
+  display: var(--header-display);
+}
+
+.header{
+  height: 80px;
+  display: grid; 
+  grid-template-columns: 1fr 80px; 
+  grid-template-rows: auto; 
+  background-color:#66f897;
+}
+
+.header .Titel{
+  text-align: left;
+  margin-left: 20px;
+}
+
+.header button{
+  font-size: 30px;
+  background-color: #57b573;
+  border: none;
+}
+.header button:hover{
+  font-size: 40px;
 }
 </style>
