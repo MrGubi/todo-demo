@@ -2,7 +2,7 @@
     <div>
         <form @submit="addTask">
             <datepicker v-model="date"/>
-            <input type="text" v-model="title" name="title"/>
+            <input type="text" v-model="title" name="title" maxlength="50"/>
             <select v-model="priority">
                 <option value="1">1</option> 
                 <option value="2">2</option> 
@@ -38,7 +38,7 @@ export default {
     return {
       date,
     };
-  },
+    },
     methods: {
         addTask(event){
             event.preventDefault();
@@ -47,13 +47,14 @@ export default {
                 id: uuidv4(),
                 title: this.title,
                 priority: this.priority,
-                deadline: this.date,
+                deadline: new Date(this.date).getTime(),
                 completed: false
             }
 
             this.$emit("add-task-event", newTask)
             this.title = '';
         }
-    }
+    },
+
 }
 </script>
